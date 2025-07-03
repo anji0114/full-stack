@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   dynamodb-local:
@@ -20,21 +20,3 @@ services:
       - DYNAMO_ENDPOINT=http://dynamodb-local:8000
     depends_on:
       - dynamodb-local
-
-  api:
-    build:
-      context: ./api
-      dockerfile: Dockerfile
-    container_name: nestjs-api
-    ports:
-      - "4000:4000"
-    environment:
-      - NODE_ENV=development
-      - PORT=4000
-      - DYNAMODB_ENDPOINT=http://dynamodb-local:8000
-    depends_on:
-      - dynamodb-local
-    volumes:
-      - ./api:/app
-      - /app/node_modules
-    command: pnpm run start:dev
